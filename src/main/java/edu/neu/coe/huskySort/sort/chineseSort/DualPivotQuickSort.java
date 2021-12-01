@@ -10,10 +10,11 @@ public class DualPivotQuickSort {
         return collator.compare(s1, s2);
     }
 
-    public static void swap(String[] list, int i, int j) {
-        String t = list[i];
-        list[i]=list[j];
-        list[j]=t;
+    // CONSIDER invoke swap in BaseHelper.
+    private static void swap(final String[] ys, final int i, final int j) {
+        final String temp = ys[i];
+        ys[i] = ys[j];
+        ys[j] = temp;
     }
 
     static void sort(String[] A, int left, int right) {
@@ -47,6 +48,7 @@ public class DualPivotQuickSort {
             sort(A, g + 1, right);
         }
     }
+
     public static String[] sort(String[] arr) {
         sort(arr,0,arr.length-1);
         return arr;
