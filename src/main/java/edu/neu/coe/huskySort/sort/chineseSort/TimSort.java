@@ -11,7 +11,6 @@ public class TimSort {
     }
 
     static TimSort tim = new TimSort();
-    static int RUN = 32;
     static int min(int a, int b){
         if(a<b) {
             return a;
@@ -76,11 +75,11 @@ public class TimSort {
     public static String[] sort(String[] a){
         int n = a.length;
 
-        for (int i = 0; i < n; i+=RUN) {
-            insertionSort(a, i, min((i+RUN-1), (n-1)));
+        for (int i = 0; i < n; i+=32) {
+            insertionSort(a, i, min((i+32-1), (n-1)));
         }
 
-        for (int size = RUN; size < n; size = 2*size) {
+        for (int size = 32; size < n; size = 2*size) {
             for (int beg = 0; beg < n; beg += 2*size) {
                 int mid = beg + size - 1;
                 int end = min((beg + 2*size - 1),(n-1));

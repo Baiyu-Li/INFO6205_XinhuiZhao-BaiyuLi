@@ -4,7 +4,7 @@ import java.text.Collator;
 import java.util.Locale;
 
 public class LSDRadixSort {
-    private final int ASCII_RANGE = 65281;
+    private final int ASCII_RANGE = 32800;
 
     /**
      * findMaxLength method returns maximum length of all available strings in an array
@@ -33,11 +33,7 @@ public class LSDRadixSort {
             return 0;
         }else {
             byte[] bytes = collator.getCollationKey(String.valueOf(str.charAt(charPosition))).toByteArray();
-            if (bytes.length < 7) {
-                return (bytes[0] & 0xFF) * 255;
-            } else {
-                return (bytes[0] & 0xFF) * 255 + (bytes[1] & 0xFF);
-            }
+            return (bytes[0] & 0xFF) * 255 + (bytes[1] & 0xFF);
         }
     }
 

@@ -52,15 +52,11 @@ public class MSDRadixSort {
         Collator collator = Collator.getInstance(Locale.CHINA);
         if (d < s.length()) {
             byte[] bytes = collator.getCollationKey(String.valueOf(s.charAt(d))).toByteArray();
-            if (bytes.length < 7) {
-                return (bytes[0] & 0xFF) * 255;
-            } else {
-                return (bytes[0] & 0xFF) * 255 + (bytes[1] & 0xFF);
-            }
+            return (bytes[0] & 0xFF) * 255 + (bytes[1] & 0xFF);
         }else return -1;
     }
 
-    private static final int radix = 62581;
-    private static final int cutoff = 16;
+    private static final int radix = 32800;
+    private static final int cutoff = 15;
     private static String[] aux;       // auxiliary array for distribution
 }
