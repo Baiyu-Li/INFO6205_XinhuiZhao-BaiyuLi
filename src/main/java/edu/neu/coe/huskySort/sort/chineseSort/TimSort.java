@@ -1,6 +1,7 @@
 package edu.neu.coe.huskySort.sort.chineseSort;
 
 import java.text.Collator;
+import java.util.Arrays;
 import java.util.Locale;
 
 public class TimSort {
@@ -90,5 +91,13 @@ public class TimSort {
             }
         }
         return a;
+    }
+
+    public static String[] preProcess(String[] xs) {
+        return Arrays.copyOf(xs, xs.length);
+    }
+
+    public static String[] postProcess(String[] xs){
+        return xs;
     }
 }

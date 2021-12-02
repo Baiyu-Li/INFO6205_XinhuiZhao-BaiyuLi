@@ -1,6 +1,10 @@
 package edu.neu.coe.huskySort.sort.chineseSort;
 
+import edu.neu.coe.huskySort.sort.BaseHelper;
+import edu.neu.coe.huskySort.sort.simple.QuickSort;
+
 import java.text.Collator;
+import java.util.Arrays;
 import java.util.Locale;
 
 public class DualPivotQuickSort {
@@ -53,5 +57,12 @@ public class DualPivotQuickSort {
         sort(arr,0,arr.length-1);
         return arr;
     }
-}
 
+    public static String[] preProcess(String[] xs) {
+        return Arrays.copyOf(xs, xs.length);
+    }
+
+    public static String[] postProcess(String[] xs){
+        return xs;
+    }
+}

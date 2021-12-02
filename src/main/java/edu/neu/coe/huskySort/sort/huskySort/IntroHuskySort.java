@@ -118,12 +118,14 @@ public class IntroHuskySort<X extends Comparable<X>> extends AbstractHuskySort<X
      * In this implementation, we delegate the post-processing to the helper.
      *
      * @param xs the array to be post-processed.
+     * @return
      */
     @Override
-    public void postProcess(final X[] xs) {
+    public X[] postProcess(final X[] xs) {
         super.postProcess(xs);
         if (adjunctSorter != null)
             adjunctSorter.postProcess(xs);
+        return null;
     }
 
     /**

@@ -51,7 +51,7 @@ public abstract class QuickSort<X extends Comparable<X>> extends SortWithHelper<
      * @param to    the index of the first element not to sort.
      * @param depth the depth of the recursion.
      */
-    void sort(X[] xs, int from, int to, int depth) {
+    public void sort(X[] xs, int from, int to, int depth) {
         if (terminator(xs, from, to, depth)) return;
         getHelper().registerDepth(depth);
         Partition<X> partition = createPartition(xs, from, to);
@@ -117,7 +117,7 @@ public abstract class QuickSort<X extends Comparable<X>> extends SortWithHelper<
 
     private final InsertionSort<X> insertionSort;
 
-    protected Partitioner<X> partitioner;
+    public Partitioner<X> partitioner;
 
     final static LazyLogger logger = new LazyLogger(QuickSort.class);
 }

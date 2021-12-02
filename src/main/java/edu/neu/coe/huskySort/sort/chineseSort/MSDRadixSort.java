@@ -3,6 +3,7 @@ package edu.neu.coe.huskySort.sort.chineseSort;
 import edu.neu.coe.huskySort.sort.simple.InsertionSortMSD;
 
 import java.text.Collator;
+import java.util.Arrays;
 import java.util.Locale;
 
 public class MSDRadixSort {
@@ -59,4 +60,12 @@ public class MSDRadixSort {
     private static final int radix = 32800;
     private static final int cutoff = 15;
     private static String[] aux;       // auxiliary array for distribution
+
+    public static String[] preProcess(String[] xs) {
+        return Arrays.copyOf(xs, xs.length);
+    }
+
+    public static String[] postProcess(String[] xs){
+        return xs;
+    }
 }

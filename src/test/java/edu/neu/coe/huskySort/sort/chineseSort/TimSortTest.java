@@ -1,5 +1,7 @@
 package edu.neu.coe.huskySort.sort.chineseSort;
 
+import edu.neu.coe.huskySort.sort.BaseHelper;
+import edu.neu.coe.huskySort.sort.Helper;
 import org.junit.Test;
 
 import java.io.*;
@@ -19,19 +21,33 @@ public class TimSortTest {
             "罗庆富", "舒冬梅", "宋雪光", "苏会敏", "王广风", "王诗卉", "许凤山", "杨腊香", "袁继鹏"};
 
     @Test
-    public void sort() {
+    public void sort1() {
         String[] res = TimSort.sort(input);
         assertArrayEquals(expected, res);
     }
 
     @Test
-    public void sort1() {
-        String[] xs = getWords(TimSortTest::lineAsList);
+    public void sort2() {
+        String[] xs = getWords("shuffledChinese.txt", TimSortTest::lineAsList);
         TimSort test = new TimSort();
         String[] ys = test.sort(xs);
         assertEquals("阿安", ys[0]);
         assertEquals("阿彬", ys[1]);
         assertEquals("瞿麟曼", ys[999997]);
+    }
+
+    @Test
+    public void sort3() {
+        int n = 200;
+        final Helper<String> helper = new BaseHelper<>("test", n, 1L);
+        helper.init(n);
+        String[] words = getWords("Chinese_Test.txt", TimSortTest::lineAsList);
+        final String[] xs = helper.random(String.class, r -> words[r.nextInt(words.length)]);
+        assertEquals(n, xs.length);
+        TimSort test = new TimSort();
+        String[] ys = test.sort(xs);
+        assertEquals("阿安", ys[0]);
+        assertEquals("阿赤", ys[199]);
     }
 
     /**
@@ -50,14 +66,14 @@ public class TimSortTest {
      * @param stringListFunction a function which takes a String and splits into a List of Strings.
      * @return an array of Strings.
      */
-    static String[] getWords(final Function<String, List<String>> stringListFunction) {
+    static String[] getWords(final String resource, final Function<String, List<String>> stringListFunction) {
         try {
-            final File file = new File(getPathname(TimSortTest.class));
-            final String[] result = getWordArray(file, stringListFunction);
+            final File file = new File(getPathname(resource, TimSortTest.class));
+            final String[] result = getWordArray(file, stringListFunction, 2);
             System.out.println("getWords: testing with " + formatWhole(result.length) + " unique words: from " + file);
             return result;
         } catch (final FileNotFoundException e) {
-            System.out.println("Cannot find resource: " + "shuffledChinese.txt");
+            System.out.println("Cannot find resource: " + resource);
             return new String[0];
         }
     }
@@ -75,11 +91,13 @@ public class TimSortTest {
      *
      * @param file               the file to read.
      * @param stringListFunction a function which takes a String and splits into a List of Strings.
+     * @param minLength          the minimum acceptable length for a word.
      * @return an array of Strings.
      */
-    static String[] getWordArray(final File file, final Function<String, List<String>> stringListFunction) {
+    static String[] getWordArray(final File file, final Function<String, List<String>> stringListFunction,
+                                 final int minLength) {
         try (final FileReader fr = new FileReader(file)) {
-            return getWordList(fr, stringListFunction, 2).toArray(new String[0]);
+            return getWordList(fr, stringListFunction, minLength).toArray(new String[0]);
         } catch (final IOException e) {
             System.out.println("Cannot open file: " + file);
             return new String[0];
@@ -92,26 +110,10 @@ public class TimSortTest {
         return words;
     }
 
-    private static String getPathname(@SuppressWarnings("SameParameterValue") final Class<?> clazz)
+    private static String getPathname(final String resource, @SuppressWarnings("SameParameterValue") final Class<?> clazz)
             throws FileNotFoundException {
-        final URL url = clazz.getClassLoader().getResource("shuffledChinese.txt");
+        final URL url = clazz.getClassLoader().getResource(resource);
         if (url != null) return url.getPath();
-        throw new FileNotFoundException("shuffledChinese.txt" + " in " + clazz);
-    }
-
-    @Test
-    public void getHelper() {
-    }
-
-    @Test
-    public void init() {
-    }
-
-    @Test
-    public void preProcess() {
-    }
-
-    @Test
-    public void close() {
+        throw new FileNotFoundException(resource + " in " + clazz);
     }
 }

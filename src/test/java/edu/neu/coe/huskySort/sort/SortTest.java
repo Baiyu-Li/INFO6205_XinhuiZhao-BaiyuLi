@@ -70,10 +70,12 @@ public class SortTest {
              *
              * @param xs the array to be post-processed.
              * @throws BaseHelper.HelperException if the array xs is not sorted.
+             * @return
              */
             @Override
-            public void postProcess(Integer[] xs) {
+            public Integer[] postProcess(Integer[] xs) {
                 if (!getHelper().sorted(xs)) throw new BaseHelper.HelperException("Array is not sorted");
+                return null;
             }
         };
         final Helper<Integer> helper = sorter.getHelper();

@@ -1,9 +1,7 @@
-package edu.neu.coe.huskySort.sort.huskySort;
+package edu.neu.coe.huskySort.sort.chineseSort;
 
 import edu.neu.coe.huskySort.sort.huskySortUtils.Coding;
 import edu.neu.coe.huskySort.sort.huskySortUtils.HuskyCoder;
-import edu.neu.coe.huskySort.sort.huskySortUtils.HuskyCoderFactory;
-import edu.neu.coe.huskySort.sort.huskySortUtils.HuskySortHelper;
 import edu.neu.coe.huskySort.sort.simple.InsertionSort;
 import edu.neu.coe.huskySort.util.LazyLogger;
 
@@ -20,27 +18,13 @@ import static java.util.Arrays.binarySearch;
  * @param <X> the type of the elements to be sorted.
  */
 public class PureHuskySort<X extends Comparable<X>> {
-
-    public static void main(final String[] args) {
-
-        final int N = 50000;
-        final int m = 10000;
-        logger.info("PureHuskySort.main: sorting " + N + " random alphabetic ASCII words " + m + " times");
-        // Just for test purpose: this should take about 3 minutes
-        final PureHuskySort<String> sorter = new PureHuskySort<>(HuskyCoderFactory.asciiCoder, false, false);
-        for (int i = 0; i < m; i++) {
-            final String[] alphaBetaArray = HuskySortHelper.generateRandomAlphaBetaArray(N, 4, 9);
-            sorter.sort(alphaBetaArray);
-        }
-        logger.info("PureHuskySort.main: finished");
-    }
-
     /**
      * The main sort method.
      *
      * @param xs the array to be sorted.
+     * @return
      */
-    public void sort(final X[] xs) {
+    public String[] sort(final X[] xs) {
         // NOTE: we start with a random shuffle
         // This is necessary if we might be sorting a pre-sorted array. Otherwise, we usually don't need it.
         if (mayBeSorted) Collections.shuffle(Arrays.asList(xs));
@@ -51,11 +35,12 @@ public class PureHuskySort<X extends Comparable<X>> {
 
         // NOTE: Second pass (if required) to fix any remaining inversions.
         if (coding.perfect)
-            return;
+            return new String[0];
         if (useInsertionSort)
             new InsertionSort<X>().mutatingSort(xs);
         else
             Arrays.sort(xs);
+        return new String[0];
     }
 
     /**
@@ -222,5 +207,12 @@ public class PureHuskySort<X extends Comparable<X>> {
     private final boolean mayBeSorted;
     private final boolean useInsertionSort;
 
-    private final static LazyLogger logger = new LazyLogger(PureHuskySort.class);
+    private final static LazyLogger logger = new LazyLogger(edu.neu.coe.huskySort.sort.huskySort.PureHuskySort.class);
+
+    public X[] preProcess(X[] xs){
+        return Arrays.copyOf(xs,xs.length);
+    }
+    public X[] postProcess(X[] xs){
+        return xs;
+    }
 }
