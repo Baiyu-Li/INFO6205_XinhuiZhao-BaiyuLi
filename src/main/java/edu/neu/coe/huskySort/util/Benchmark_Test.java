@@ -58,25 +58,25 @@ public class Benchmark_Test {
 			System.out.println("----------------------- Name List with " + i + " Long -----------------------");
 
 			Benchmark<String[]> bmTim = new Benchmark<>("Chinese Tim sort", TimSort::preProcess, TimSort::sort);
-			double times = bmTim.run(xs, 5);
-			System.out.println("Run time is " + times);
+			double times = bmTim.run(xs, 10);
+			System.out.println("Average run time of 10 repeat runs is " + times);
 
 			PureHuskySort<String> pureHusky = new PureHuskySort<>(HuskySortCoderFactory.chineseUnicodeCoder, false, false);
 			Benchmark<String[]> bmPureHusky = new Benchmark<>("Chinese Pure Husky Sort", pureHusky::preProcess, pureHusky::sort);
-			times = bmPureHusky.run(xs, 5);
-			System.out.println("Run time is " + times);
+			times = bmPureHusky.run(xs, 10);
+			System.out.println("Average run time of 10 repeat runs is " + times);
 
 			Benchmark<String[]> bmDualPivotQuick = new Benchmark<>("Chinese Dual-Pivot Quick sort", DualPivotQuickSort::preProcess, DualPivotQuickSort::sort);
-			times = bmDualPivotQuick.run(xs, 5);
-			System.out.println("Run time is " + times);
+			times = bmDualPivotQuick.run(xs, 10);
+			System.out.println("Average run time of 10 repeat runs is " + times);
 
 			Benchmark<String[]> bmLSDRadix = new Benchmark<>("Chinese LSD Radix sort", LSDRadixSort::preProcess, LSDRadixSort::sort);
-			times = bmLSDRadix.run(xs, 5);
-			System.out.println("Run time is " + times);
+			times = bmLSDRadix.run(xs, 10);
+			System.out.println("Average run time of 10 repeat runs is " + times);
 
 			Benchmark<String[]> bmMSDRadix = new Benchmark<>("Chinese MSD Radix sort", MSDRadixSort::preProcess, MSDRadixSort::sort);
-			times = bmMSDRadix.run(xs, 5);
-			System.out.println("Run time is " + times);
+			times = bmMSDRadix.run(xs, 10);
+			System.out.println("Average run time of 10 repeat runs is " + times);
 		}
 	}
 
