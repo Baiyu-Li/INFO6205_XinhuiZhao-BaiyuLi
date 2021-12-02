@@ -23,7 +23,7 @@ import java.util.Random;
 /**
  * Factory class for HuskyCoders.
  */
-public final class HuskySort {
+public final class HuskySortCoderFactory {
 
     private static final int BITS_LONG = 64;
     private static final int BITS_BYTE = 8;
@@ -225,7 +225,7 @@ public final class HuskySort {
     /**
      * A Husky Coder for Doubles.
      */
-    public final static HuskyCoder<Double> doubleCoder = HuskySort::doubleToLong;
+    public final static HuskyCoder<Double> doubleCoder = HuskySortCoderFactory::doubleToLong;
 
     /**
      * A Husky Coder for Integers.
