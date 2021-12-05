@@ -1,6 +1,6 @@
 # INFO 6205 Fall 2021 Team Project  
 
-## Baiyu Li 001569441 & Xinhui Zhao 001560851  
+## Baiyu Li 001569441 & Xinhui Zhao 001560851
 
 ### Implement five sorts and related benchmark for a natural language (Simplified Chinese) which uses Unicode characters.  
 - Benchmark   
@@ -30,3 +30,6 @@
 
 ### Modify the HuskyCoderFactory.java to implement the PureHuskySort
 - New HuskyCoderFactory: src/main/java/edu/neu/coe/huskySort/sort/chineseSort/HuskySortCoderFactory.java   
+
+### Paper + Report + Sorted Result .txt
+- Analysis Result Folder
