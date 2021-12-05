@@ -104,7 +104,7 @@ public class TimSortTest {
         }
     }
 
-    static List<String> lineAsList(final String line) {
+    public static List<String> lineAsList(final String line) {
         final List<String> words = new ArrayList<>();
         words.add(line);
         return words;
